@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import DirectoryMenu from "../../components/directory-menu/directory-menu.component";
 const Home = () => {
   const categories = [
@@ -33,7 +34,12 @@ const Home = () => {
     },
   ];
 
-  return <DirectoryMenu categories={categories} />;
+  return (
+    <div>
+      <Outlet />
+      <DirectoryMenu categories={categories} />
+    </div>
+  );
 };
 
 export default Home;
