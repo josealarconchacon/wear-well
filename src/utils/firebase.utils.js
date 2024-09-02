@@ -12,6 +12,7 @@ import {
   setDoc,
   Firestore,
 } from "firebase/firestore";
+import { handleError } from "./error-handle/handle-error";
 
 // firebase config
 const firebaseConfig = {
@@ -33,6 +34,8 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 
 export const db = getFirestore();
 
@@ -40,7 +43,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   console.log(userDocRef);
   const userSnapshot = await getDoc(userDocRef);
-  if (!userSnapshot.exists()) {
+  if (userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
@@ -51,6 +54,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       });
     } catch (error) {
       console.log("Error creating user document", error);
+      handleError(error, "error occurred while creating the user document");
     }
   }
 };
