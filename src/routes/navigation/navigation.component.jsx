@@ -1,8 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as Ecommerce } from "../../assets/ecommerce.svg";
+import { UserContext } from "../../context/user.context";
 import "./navigation.styles.scss";
 const Navigation = () => {
+  const { currentValue } = useContext(UserContext);
+  console.log(currentValue);
   return (
     <Fragment>
       <div className="navigation">
