@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -17,7 +18,7 @@ import { handleError } from "./error-handle/handle-error";
 
 // firebase config
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyBfZqwjH1UeNAKbieSMjkf5dMaN2RUw7vQ",
   authDomain: "wear-well-db.firebaseapp.com",
   projectId: "wear-well-db",
   storageBucket: "wear-well-db.appspot.com",
@@ -83,6 +84,22 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     return user; // Return the user object
   } catch (error) {
     console.error("Error creating user with email and password", error);
+    throw error;
+  }
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  try {
+    // Firebase Authentication to sign in a user
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user; // Return the user object
+  } catch (error) {
+    console.error("Error signing in user with email and password", error);
     throw error;
   }
 };
