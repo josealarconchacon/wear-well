@@ -18,7 +18,7 @@ import { handleError } from "./error-handle/handle-error";
 
 // firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBfZqwjH1UeNAKbieSMjkf5dMaN2RUw7vQ",
+  apiKey: "",
   authDomain: "wear-well-db.firebaseapp.com",
   projectId: "wear-well-db",
   storageBucket: "wear-well-db.appspot.com",
